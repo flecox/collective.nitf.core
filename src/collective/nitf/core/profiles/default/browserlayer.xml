@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<layers>
+ <layer name="collective.nitf.core.layer"
+    interface="collective.nitf.core.interfaces.INITFBrowserLayer" />
+</layers>

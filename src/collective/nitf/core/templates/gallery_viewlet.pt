@@ -1,0 +1,6 @@
+<div id="mediabox" class="gallery" tal:condition="view/getImage">
+    <span>
+        <img src="static/blank.gif"
+             tal:attributes="src string:${context/absolute_url}/++resource++collective.core.nift/blank.gif" />
+    </span>
+</div>

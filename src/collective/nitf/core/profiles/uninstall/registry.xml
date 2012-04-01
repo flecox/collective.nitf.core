@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<registry>
+    <record name="collective.nitf.core.controlpanel.INITFSettings.sections" delete="true" />
+    <record name="collective.nitf.core.controlpanel.INITFSettings.default_section" delete="true" />
+    <record name="collective.nitf.core.controlpanel.INITFSettings.default_genre" delete="true" />
+    <record name="collective.nitf.core.controlpanel.INITFSettings.default_urgency" delete="true" />
+</registry>

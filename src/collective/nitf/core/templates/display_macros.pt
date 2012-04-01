@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@view/macros/main"
+      i18n:domain="collective.nitf.core">
+<body>
+
+<metal:main fill-slot="content-core">
+    <tal:content-core metal:define-macro="content-core">
+        <div class="mediaview">
+            <metal:mediamacro define-macro="media-box">
+            <div id="mediabox" tal:define="images view/get_images" tal:condition="images">
+                <div id="images">
+                    <div class="items">
+                        <tal:lines repeat="item images">
+                        <div tal:define="item_obj item/getObject">
+                            <div>
+                                <img tal:replace="structure python: item_obj.getImage().tag(scale='preview', css_class='media-image')" src="" alt="" />
+                                <div class="info" tal:condition="item_obj/Description|nothing">
+                                    <p tal:content="item_obj/Description">Image Caption</p>
+                                </div>
+                            </div>
+                        </div>
+                        </tal:lines>
+                    </div>
+                </div>
+
+                <!-- prev/next buttons -->
+                <div class="navibuttons" metal:define-slot="navi">
+                    <metal:navi define-macro="navi">
+                        <div class="navi prev"></div>
+                        <div class="navi next"></div>
+                    </metal:navi>
+                </div>
+                <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
+
+                <div class="visualClear"><!-- --></div>
+
+            </div>
+            </metal:mediamacro>
+        </div>
+
+        <div metal:define-macro="text-field-view" id="parent-fieldname-text" class="stx">
+            <div metal:define-slot="inside" tal:replace="structure context/text/output">The body</div>
+        </div>
+
+        <fieldset id="related-items" tal:condition="exists:context/relatedItems">
+            <legend i18n:translate="">Related items</legend>
+            <tal:relateditems tal:content="structure view/w/IRelatedItems.relatedItems/render" />
+        </fieldset>
+
+        <fieldset id="folder-listing">
+            <legend i18n:translate="">Contents</legend>
+            <tal:block define="listing_macro context/folder_listing/macros/listing;
+                               contentFilter python:{'portal_type': ['File', 'Link']}">
+                <metal:use_macro use-macro="listing_macro" />
+            </tal:block>
+        </fieldset>
+
+    </tal:content-core>
+</metal:main>
+
+</body>
+</html>

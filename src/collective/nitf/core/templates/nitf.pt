@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.iptc.org/std/NITF/3.5/specification/nitf-3-5.dtd">
+<nitf change.date="September 11, 2009" change.time="12:26" version="-//IPTC//DTD NITF 3.5//EN"
+   xmlns:tal="http://xml.zope.org/namespaces/tal"
+   xmlns:metal="http://xml.zope.org/namespaces/metal">
+    <metal:block tal:define="dummy python:request.RESPONSE.setHeader('Content-Type','text/xml;;charset=utf-8')" />
+    <head>
+        <title tal:content="context/title" />
+        <tobject tobject.type="news">
+            <tobject.property tobject.property.type=""
+               tal:attributes="tobject.property.type context/genre" />
+        </tobject>
+        <docdata management-status="usable">
+            <doc-id id-string="" tal:attributes="id-string view/uuid" />
+            <urgency ed-urg="" tal:attributes="ed-urg context/urgency" />
+            <!-- TODO: date.issue: when the document was sent to a receiver -->
+            <date.issue norm="" />
+            <date.release tal:condition="python:context.EffectiveDate() != 'None'"
+               norm="" tal:attributes="norm context/EffectiveDate" />
+            <date.expire tal:condition="python:context.ExpirationDate() != 'None'"
+               norm="" tal:attributes="norm context/ExpirationDate" />
+            <doc.copyright holder=""
+               tal:attributes="holder context/Rights" />
+            <doc.rights tal:content="context/Rights" />
+            <key-list tal:repeat="subject context/subject">
+                <keyword key="" tal:attributes="key subject" />
+            </key-list>
+            <identified-content />
+        </docdata>
+        <pubdata type="web" name="" position.section="" ex-ref=""
+           tal:attributes="position.section context/section" />
+        <revision-history />
+    </head>
+    <body>
+        <body.head>
+            <hedline>
+                <hl1 tal:content="context/title" />
+                <hl2 tal:condition="context/subtitle"
+                   tal:content="context/subtitle" />
+            </hedline>
+            <byline tal:condition="context/byline"
+               tal:content="context/byline" />
+            <distributor />
+            <dateline>
+                <location tal:content="context/location" />
+            </dateline>
+            <abstract>
+                <p tal:content="context/description" />
+            </abstract>
+        </body.head>
+        <body.content>
+            <tal:media repeat="media view/get_media">
+            <media tal:replace="structure media" />
+            </tal:media>
+            <block tal:replace="structure context/text/output|nothing" />
+        </body.content>
+        <body.end tal:condition="context/Rights">
+            <tagline>
+                <copyrite tal:content="context/Rights" />
+            </tagline>
+        </body.end>
+    </body>
+</nitf>

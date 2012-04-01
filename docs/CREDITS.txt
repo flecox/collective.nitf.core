@@ -1,0 +1,12 @@
+Contributors
+------------
+
+* Héctor Velarde (hector.velarde@gmail.com)
+
+* Joaquín Rosales (globojorro@gmail.com)
+
+* Érico Andrei (erico@simplesconsultoria.com.br)
+
+* Gonzalo Almeida (flecox@ravvit.net)
+
+Development sponsored by Open Multimedia.
